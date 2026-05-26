@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>History - Alcohol Tracker</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="nav-brand">
+            <i class="fa-solid fa-wine-glass-empty"></i>
+            <span>Alcohol Tracker</span>
+        </div>
+        <ul class="nav-links">
+            <li><a href="index.html"><i class="fa-solid fa-gauge"></i> Dashboard</a></li>
+            <li><a href="history.html" class="active"><i class="fa-solid fa-clock-rotate-left"></i> History</a></li>
+            <li><a href="reports.html"><i class="fa-solid fa-chart-bar"></i> Reports</a></li>
+        </ul>
+        <div class="nav-user">
+            <span id="nav-username"><i class="fa-solid fa-user"></i> User</span>
+            <a href="/api/auth/logout" class="logout-btn"><i class="fa-solid fa-right-from-bracket"></i> Logout</a>
+        </div>
+    </nav>
+
+    <div class="page-container">
+        <div class="content-container">
+            <h1 class="page-title">Drink History</h1>
+
+            <!-- Filters -->
+            <div class="card filter-card">
+                <div class="filter-row">
+                    <div class="filter-group">
+                        <label for="filter-from">From</label>
+                        <input type="date" id="filter-from">
+                    </div>
+                    <div class="filter-group">
+                        <label for="filter-to">To</label>
+                        <input type="date" id="filter-to">
+                    </div>
+                    <div class="filter-group">
+                        <label for="filter-type">Beverage</label>
+                        <input type="text" id="filter-type" placeholder="e.g. Beer">
+                    </div>
+                    <button id="filter-btn" class="primary-btn filter-btn">
+                        <i class="fa-solid fa-filter"></i> Filter
+                    </button>
+                    <button id="clear-btn" class="secondary-btn filter-btn">
+                        <i class="fa-solid fa-xmark"></i> Clear
+                    </button>
+                </div>
+            </div>
+
+            <!-- History Table -->
+            <div class="card">
+                <table class="data-table" id="history-table">
+                    <thead>
+                        <tr>
+                            <th>Date & Time</th>
+                            <th>Beverage</th>
+                            <th>Qty</th>
+                            <th>Source</th>
+                            <th>Notes</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="history-tbody">
+                        <!-- Dynamic rows -->
+                    </tbody>
+                </table>
+                <p id="empty-history" class="empty-state" style="display:none;">
+                    <i class="fa-solid fa-glass-water"></i><br>No drinks found matching your filters.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Edit Modal -->
+    <div id="edit-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-edit-btn">&times;</span>
+            <h2><i class="fa-solid fa-pen"></i> Edit Drink</h2>
+            <form id="edit-form">
+                <input type="hidden" id="edit-id">
+                <div class="form-group">
+                    <label for="edit-name">Beverage Name</label>
+                    <input type="text" id="edit-name" required>
+                </div>
+                <div class="form-group">
+                    <label for="edit-qty">Quantity</label>
+                    <input type="number" id="edit-qty" step="0.5" min="0.5" required>
+                </div>
+                <div class="form-group">
+                    <label for="edit-notes">Notes</label>
+                    <input type="text" id="edit-notes">
+                </div>
+                <button type="submit" class="primary-btn">Save Changes</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="js/history.js"></script>
+</body>
+</html>
